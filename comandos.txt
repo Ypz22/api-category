@@ -1,0 +1,17 @@
+
+docker run --name test-db -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=WebAvanzado -p 3306:3306 -d --network test-network mysql
+
+docker build -t img-app-categories .
+
+docker run -dit -p 8081:8081 --name c-app-categories --network test-network -e DB_HOST=test-db:3306 img-app-categories
+
+
+docker run -dit \
+  -p 8081:8080 \
+  --name c-app-categories \
+  --network test-network \
+  -e DB_HOST=test-db \
+  -e DB_USER=root \
+  -e DB_PASSWORD=admin \
+  -e DB_DATABASE=WebAvanzado \
+  img-app-categories
